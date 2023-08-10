@@ -1,5 +1,5 @@
-defmodule ExProxmox.Request.Hackney do
-  @behaviour ExProxmox.Request.HttpClient
+defmodule ExPVE.Request.Hackney do
+  @behaviour ExPVE.Request.HttpClient
 
   @moduledoc """
   Configuration for `:hackney`.

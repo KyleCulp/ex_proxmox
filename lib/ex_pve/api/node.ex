@@ -1,4 +1,4 @@
-defmodule ExProxmox.Node do
+defmodule ExPVE.Node do
   @moduledoc """
   The Nodes routes of the PVE API.
   /api2/json/nodes and all nested routes.
@@ -13,7 +13,7 @@ defmodule ExProxmox.Node do
   end
 
   def config(node) do
-    ExProxmox.hello()
+    ExPVE.hello()
   end
 
   @type change_config_opts :: [
@@ -30,13 +30,13 @@ defmodule ExProxmox.Node do
 
   ## Examples
   ```
-  Node.change_config(node, description: "Describe the node config") |> ExProxmox.request!
-  Node.change_config(node, acme: %{}) |> ExProxmox.request!
+  Node.change_config(node, description: "Describe the node config") |> ExPVE.request!
+  Node.change_config(node, acme: %{}) |> ExPVE.request!
 
   ```
   """
-  @spec change_config(node :: binary) :: ExProxmox.Operation.JSON.t()
-  @spec change_config(node :: binary, opts :: change_config_opts) :: ExProxmox.Operation.JSON.t()
+  @spec change_config(node :: binary) :: ExPVE.Operation.JSON.t()
+  @spec change_config(node :: binary, opts :: change_config_opts) :: ExPVE.Operation.JSON.t()
   @params [:delimiter, :marker, :prefix, :encoding_type, :max_keys]
   def change_config(node, opts \\ []) do
   end
@@ -79,8 +79,8 @@ defmodule ExProxmox.Node do
 
   ```
   """
-  @spec journal(node :: binary) :: ExProxmox.Operation.JSON.t()
-  @spec journal(node :: binary, opts :: journal_opts) :: ExProxmox.Operation.JSON.t()
+  @spec journal(node :: binary) :: ExPVE.Operation.JSON.t()
+  @spec journal(node :: binary, opts :: journal_opts) :: ExPVE.Operation.JSON.t()
   def journal(node, opts \\ []) do
 
   end
@@ -117,7 +117,7 @@ defmodule ExProxmox.Node do
 
   ## Examples
   ```
-  Node.report() |> ExProxmox.request!
+  Node.report() |> ExPVE.request!
   ```
   """
   def report(node) do
@@ -129,7 +129,7 @@ defmodule ExProxmox.Node do
 
   ## Examples
   ```
-  Node.report() |> ExProxmox.request!
+  Node.report() |> ExPVE.request!
   ```
   """
   def rrd(node) do

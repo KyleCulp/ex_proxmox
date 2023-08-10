@@ -1,4 +1,4 @@
-# ExProxmox
+# ExPVE
 
 <!-- MDOC !-->
 
@@ -9,7 +9,7 @@
 [![hexdocs.pm](https://img.shields.io/badge/hexdocs-release-lightgreen.svg)](https://hexdocs.pm/ex_proxmox)
 [![github.com](https://img.shields.io/github/last-commit/ex-proxmox/ex_proxmox.svg)](https://github.com/ex-proxmox/ex_proxmox/commits/master)
 
-Proxmox client for Elixir. Heavily inspired by ex_aws. View the [Proxmox PVE API Docs](https://pve.proxmox.com/pve-docs/api-viewer/). ExProxmox has been tested on v6, v7, and v8 clusters. 
+Proxmox client for Elixir. Heavily inspired by ex_aws. View the [Proxmox PVE API Docs](https://pve.proxmox.com/pve-docs/api-viewer/). ExPVE has been tested on v6, v7, and v8 clusters. 
 
 ## Installation
 
@@ -31,7 +31,7 @@ be found at <https://hexdocs.pm/ex_proxmox>.
 
 ### Hackney configuration
 
-ExProxmox by default uses [hackney](https://github.com/benoitc/hackney) to make
+ExPVE by default uses [hackney](https://github.com/benoitc/hackney) to make
 HTTP requests to the Proxmox Cluster API. You can modify the options as such:
 
 ```elixir

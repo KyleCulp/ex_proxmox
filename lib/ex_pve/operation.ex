@@ -1,17 +1,17 @@
-defprotocol ExProxmox.Operation do
+defprotocol ExPVE.Operation do
   @moduledoc """
   An operation to perform on AWS.
 
-  This module defines a protocol for executing operations on AWS. ExProxmox ships with
-  several different modules that each implement the `ExProxmox.Operation` protocol. These
+  This module defines a protocol for executing operations on AWS. ExPVE ships with
+  several different modules that each implement the `ExPVE.Operation` protocol. These
   modules each handle one of the broad categories of AWS service types:
 
-  - `ExProxmox.Operation.JSON`
-  - `ExProxmox.Operation.Query`
-  - `ExProxmox.Operation.RestQuery`
-  - `ExProxmox.Operation.S3`
+  - `ExPVE.Operation.JSON`
+  - `ExPVE.Operation.Query`
+  - `ExPVE.Operation.RestQuery`
+  - `ExPVE.Operation.S3`
 
-  ExProxmox works by creating a data structure that implements this protocol, and then
+  ExPVE works by creating a data structure that implements this protocol, and then
   calling `perform/2` on it.
   """
 
@@ -22,7 +22,7 @@ defprotocol ExProxmox.Operation do
 
   ## Example
 
-      %ExProxmox.Operation.JSON{
+      %ExPVE.Operation.JSON{
         data: %{},
         headers: [
           {"x-amz-target", "DynamoDB_20120810.ListTables"},
@@ -32,7 +32,7 @@ defprotocol ExProxmox.Operation do
         params: %{},
         path: "/",
         service: :dynamodb,
-      } |> ExProxmox.Operation.perform(ExProxmox.Config.new(:dynamodb))
+      } |> ExPVE.Operation.perform(ExPVE.Config.new(:dynamodb))
 
   """
   def perform(operation, config)

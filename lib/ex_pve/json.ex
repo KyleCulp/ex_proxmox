@@ -1,4 +1,4 @@
-defmodule ExProxmox.Operation.JSON do
+defmodule ExPVE.Operation.JSON do
   @moduledoc """
   Datastructure representing an operation on a JSON based AWS service.
 
@@ -36,18 +36,18 @@ defmodule ExProxmox.Operation.JSON do
   end
 end
 
-defimpl ExProxmox.Operation, for: ExProxmox.Operation.JSON do
-  @type response_t :: %{} | ExProxmox.Request.error_t()
+defimpl ExPVE.Operation, for: ExPVE.Operation.JSON do
+  @type response_t :: %{} | ExPVE.Request.error_t()
 
   def perform(operation, config) do
     operation = handle_callbacks(operation, config)
-    url = ExProxmox.Request.Url.build(operation, config)
+    url = ExPVE.Request.Url.build(operation, config)
 
     headers = [
       {"x-amz-content-sha256", ""} | operation.headers
     ]
 
-    ExProxmox.Request.request(
+    ExPVE.Request.request(
       operation.http_method,
       url,
       operation.data,
@@ -56,18 +56,8 @@ defimpl ExProxmox.Operation, for: ExProxmox.Operation.JSON do
       operation.service
     )
     |> operation.error_parser.()
-    |> ExProxmox.Request.default_aws_error()
+    |> ExPVE.Request.default_aws_error()
     |> parse(config)
-  end
-
-  def stream!(%ExProxmox.Operation.JSON{stream_builder: nil}, _) do
-    raise ArgumentError, """
-    This operation does not support streaming!
-    """
-  end
-
-  def stream!(%ExProxmox.Operation.JSON{stream_builder: stream_builder}, config_overrides) do
-    stream_builder.(config_overrides)
   end
 
   defp handle_callbacks(%{before_request: nil} = op, _), do: op

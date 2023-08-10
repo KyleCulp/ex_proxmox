@@ -1,4 +1,4 @@
-defmodule ExProxmox.Nodes.QEMU do
+defmodule ExPVE.Nodes.QEMU do
   @moduledoc """
   The QEMU routes of the PVE API.
   /api2/json/nodes/{node}/qemu and all nested routes.

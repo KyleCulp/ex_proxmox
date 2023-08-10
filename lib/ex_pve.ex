@@ -1,11 +1,11 @@
-defmodule ExProxmox do
+defmodule ExPVE do
   @moduledoc """
-  Documentation for ExProxmox. Wrapper for Proxmox API.
+  Documentation for ExPVE. Wrapper for Proxmox API.
   """
 
   use Application
 
-  @behaviour ExProxmox.Behaviour
+  @behaviour ExPVE.Behaviour
 
   @doc """
   Perform an AWS request.
@@ -13,7 +13,7 @@ defmodule ExProxmox do
   First build an operation from one of the services, and then pass it to this
   function to perform it.
 
-  If you want to build an operation manually, see: `ExProxmox.Operation`
+  If you want to build an operation manually, see: `ExPVE.Operation`
 
   This function takes an optional second parameter of configuration overrides.
   This is useful if you want to have certain configuration changed on a per
@@ -30,16 +30,16 @@ defmodule ExProxmox do
   If you have one of the service modules installed, you can just use those service
   modules like this:
 
-      ExProxmox.S3.list_buckets |> ExProxmox.request
+      ExPVE.S3.list_buckets |> ExPVE.request
 
-      ExProxmox.S3.list_buckets |> ExProxmox.request(region: "eu-west-1")
+      ExPVE.S3.list_buckets |> ExPVE.request(region: "eu-west-1")
 
-      ExProxmox.Dynamo.get_object("users", "foo@bar.com") |> ExProxmox.request
+      ExPVE.Dynamo.get_object("users", "foo@bar.com") |> ExPVE.request
 
   Alternatively you can create operation structs manually for services
   that aren't supported:
 
-      op = %ExProxmox.Operation.JSON{
+      op = %ExPVE.Operation.JSON{
         http_method: :post,
         service: :dynamodb,
         headers: [
@@ -48,7 +48,7 @@ defmodule ExProxmox do
         ],
       }
 
-      ExProxmox.request(op)
+      ExPVE.request(op)
 
   ## Telemetry events
 
@@ -67,10 +67,10 @@ defmodule ExProxmox do
       `:telemetry_options`
 
   """
-  @impl ExProxmox.Behaviour
-  @spec request(ExProxmox.Operation.t(), keyword) :: {:ok, term} | {:error, term}
+  @impl ExPVE.Behaviour
+  @spec request(ExPVE.Operation.t(), keyword) :: {:ok, term} | {:error, term}
   def request(op, config_overrides \\ []) do
-    ExProxmox.Operation.perform(op, ExProxmox.Config.new(op.service, config_overrides))
+    ExPVE.Operation.perform(op, ExPVE.Config.new(op.service, config_overrides))
   end
 
   @doc """
@@ -79,16 +79,16 @@ defmodule ExProxmox do
   Same as `request/1,2` except it will either return the successful response from
   AWS or raise an exception.
   """
-  @impl ExProxmox.Behaviour
-  @spec request!(ExProxmox.Operation.t(), keyword) :: term
+  @impl ExPVE.Behaviour
+  @spec request!(ExPVE.Operation.t(), keyword) :: term
   def request!(op, config_overrides \\ []) do
     case request(op, config_overrides) do
       {:ok, result} ->
         result
 
       error ->
-        raise ExProxmox.Error, """
-        ExProxmox Request Error!
+        raise ExPVE.Error, """
+        ExPVE Request Error!
 
         #{inspect(error)}
         """
@@ -100,7 +100,7 @@ defmodule ExProxmox do
 
   ## Examples
 
-      iex> ExProxmox.hello()
+      iex> ExPVE.hello()
       :world
 
   """
@@ -112,11 +112,11 @@ defmodule ExProxmox do
   @impl Application
   def start(_type, _args) do
     children = [
-      {ExProxmox.Config.AuthCache, [name: ExProxmox.Config.AuthCache]},
-      {ExProxmox.InstanceMetaTokenProvider, [name: ExProxmox.InstanceMetaTokenProvider]}
+      {ExPVE.Config.AuthCache, [name: ExPVE.Config.AuthCache]},
+      {ExPVE.InstanceMetaTokenProvider, [name: ExPVE.InstanceMetaTokenProvider]}
     ]
 
-    opts = [strategy: :one_for_one, name: ExProxmox.Supervisor]
+    opts = [strategy: :one_for_one, name: ExPVE.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

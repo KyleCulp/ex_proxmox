@@ -1,8 +1,8 @@
-defmodule ExProxmoxTest do
+defmodule ExPVETest do
   use ExUnit.Case
-  doctest ExProxmox
+  doctest ExPVE
 
   test "greets the world" do
-    assert ExProxmox.hello() == :world
+    assert ExPVE.hello() == :world
   end
 end

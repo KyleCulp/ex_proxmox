@@ -1,8 +1,8 @@
-defmodule ExProxmox.Request.HttpClient do
+defmodule ExPVE.Request.HttpClient do
   @moduledoc """
   Specifies expected behaviour of an HTTP client.
 
-  ExProxmox allows you to use your HTTP client of choice, provided that
+  ExPVE allows you to use your HTTP client of choice, provided that
   it can be coerced into complying with this module's specification.
 
   The default is `:hackney`.
@@ -15,10 +15,10 @@ defmodule ExProxmox.Request.HttpClient do
 
   ```
       config :ex_proxmox,
-        http_client: ExProxmox.Request.HTTPotion
+        http_client: ExPVE.Request.HTTPotion
 
-      defmodule ExProxmox.Request.HTTPotion do
-        @behaviour ExProxmox.Request.HttpClient
+      defmodule ExPVE.Request.HTTPotion do
+        @behaviour ExPVE.Request.HttpClient
         def request(method, url, body, headers, _http_opts) do
           case HTTPotion.request(method, url,
                 body: body,

@@ -1,4 +1,4 @@
-defmodule ExProxmox.MixProject do
+defmodule ExPVE.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/kyleculp/ex_proxmox"
@@ -10,7 +10,7 @@ defmodule ExProxmox.MixProject do
       version: @version,
       elixir: "~> 1.10",
       description: "Generic Proxmox client",
-      name: "ExProxmox",
+      name: "ExPVE",
       source_url: @source_url,
       deps: deps(),
       docs: docs(),
@@ -30,7 +30,7 @@ defmodule ExProxmox.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      [extra_applications: [:logger, :crypto], mod: {ExProxmox, []}]
+      [extra_applications: [:logger, :crypto], mod: {ExPVE, []}]
       # extra_applications: [:logger]
     ]
   end
@@ -70,7 +70,7 @@ defmodule ExProxmox.MixProject do
 
   defp description do
     """
-    Proxmox client for Elixir. Heavily inspired by ex_aws.
+    Proxmox client for Elixir. Heavily inspired by ex_aws. Tested on PVE 6, 7, 8.
     """
   end
 
