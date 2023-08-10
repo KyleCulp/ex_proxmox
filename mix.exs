@@ -70,7 +70,7 @@ defmodule ExProxmox.MixProject do
 
   defp description do
     """
-    Proxmox client for Elixir. Inspired by ex_aws.
+    Proxmox client for Elixir. Heavily inspired by ex_aws.
     """
   end
 
